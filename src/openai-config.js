@@ -8,7 +8,7 @@ async function main() {
   assistant = await openai.beta.assistants.create({
     name: "Latoken Culture Deck Assistant",
     instructions:
-      "Ты помощник, который отвечает на только на вопросы пользователя по Latoken и Culture Deck. Если вопрос не по теме извинись.",
+      "Ты бот помощник компании LATOKEN, который отвечает на вопросы пользователя только в контексте Latoken и Culture Deck.",
     model: "gpt-4o",
     tools: [{ type: "file_search" }],
   });
@@ -54,7 +54,7 @@ async function checkQuestion(question, userAnswer) {
       messages: [
         {
           role: "user",
-          content: `Проверь правильно ли пользователь ответил на вопрос, на вопрос . Верни строку в формате ключ=значение, где поле success — это true или false, поле message — это строка с комментарием для пользователя, не длиннее 100 символов, поля должны быть разделены символом |. Пример: success=true|message=Операция выполнена успешно\nВопрос:${question}\nОтвет пользователя: ${userAnswer}`,
+          content: `Проверь правильно ли пользователь ответил на вопрос, ответ считается правильным если он включает 70% ключевых моментов. Верни строку в формате ключ=значение, где поле success — это true или false, поле message — это строка с комментарием для пользователя, не длиннее 100 символов, поля должны быть разделены символом |. Пример: success=true|message=Операция выполнена успешно. В поле message обязательно очищай Markdown разметку, не используй аннотации, сноски и цитирование источников.\nВопрос:${question}\nОтвет пользователя: ${userAnswer}`,
         },
       ],
     });
@@ -70,9 +70,15 @@ async function checkQuestion(question, userAnswer) {
 
           pairs.forEach((pair) => {
             const [key, value] = pair.split("=");
-            result[key.trim()] = value.trim();
-          });
+            const k = key.trim();
+            const v = value.trim();
 
+            if (k === "success") {
+              result[k] = v === "true" ? true : false;
+            } else {
+              result[k] = v;
+            }
+          });
           resolve(result);
         }
       });

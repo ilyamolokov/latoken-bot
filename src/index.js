@@ -125,6 +125,7 @@ bot.on("callback_query", async (query) => {
 
     if (data === "end_quiz") {
       isQuizMode = false;
+      questionIndex = 0;
       await bot.answerCallbackQuery(query.id);
       return bot.sendMessage(chat_id, createWelcomeMessage(message.chat), {
         reply_markup: {
