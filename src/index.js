@@ -1,4 +1,3 @@
-// choices[0].message.content
 require("dotenv").config();
 
 const TelegramBot = require("node-telegram-bot-api");
