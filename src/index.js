@@ -26,27 +26,13 @@ bot.on("message", async (message) => {
         if (questionIndex === QUESTIONS.length) {
           isQuizMode = false;
           questionIndex = 0;
-          await bot.editMessageText(
-            `Верно!\nПоздравляю 🎉, ты ответил правильно на все вопросы, так держать!`,
+          return await bot.editMessageText(
+            `Верно!\nПоздравляю 🎉, вы ответили правильно на все вопросы, так держать!`,
             {
               chat_id,
               message_id: loader.message_id,
             }
           );
-
-          return bot.sendMessage(chat_id, createWelcomeMessage(message.chat), {
-            reply_markup: {
-              inline_keyboard: [
-                [{ text: "Сайт LATOKEN", url: LATOKEN_URL }],
-                [
-                  {
-                    text: "Начать Culture Deck Квиз",
-                    callback_data: "next_question",
-                  },
-                ],
-              ],
-            },
-          });
         }
         isQuizMode = false;
         return await bot.editMessageText(`Верно!`, {
@@ -60,15 +46,18 @@ bot.on("message", async (message) => {
           },
         });
       } else {
-        return await bot.editMessageText(`Неправильно, попробуй еще раз!\n${responseMessage}`, {
-          chat_id,
-          message_id: loader.message_id,
-          reply_markup: {
-            inline_keyboard: [
-              [{ text: "Завершить Квиз", callback_data: "end_quiz" }],
-            ],
-          },
-        });
+        return await bot.editMessageText(
+          `Неправильно, попробуй еще раз!\n${responseMessage}`,
+          {
+            chat_id,
+            message_id: loader.message_id,
+            reply_markup: {
+              inline_keyboard: [
+                [{ text: "Завершить Квиз", callback_data: "end_quiz" }],
+              ],
+            },
+          }
+        );
       }
     } else {
       if (text === "/start") {
