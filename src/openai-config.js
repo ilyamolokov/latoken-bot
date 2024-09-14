@@ -8,7 +8,7 @@ async function main() {
   assistant = await openai.beta.assistants.create({
     name: "Latoken Culture Deck Assistant",
     instructions:
-      "Ты помощник, который отвечает на вопросы пользователя по Latoken и Culture Deck",
+      "Ты помощник, который отвечает на только на вопросы пользователя по Latoken и Culture Deck. Если вопрос не по теме извинись.",
     model: "gpt-4o",
     tools: [{ type: "file_search" }],
   });
@@ -23,7 +23,7 @@ async function main() {
     "docs/goal-of-life-share-in-nasdaq-index.md",
     "docs/investors-vs-employees.md",
     "docs/report-free-riding.md",
-    "docs/the-principles-olympics-of-freedom-and-responsibility-tob-build-the-future.md",
+    "docs/the-principles-olympics-of-freedom-and-responsibility-to-build-the-future.md",
     "docs/wartime-principles.md",
     "docs/who-are-you.md",
     "docs/why-to-join-latoken.md",
@@ -44,7 +44,7 @@ async function main() {
 
 main();
 
-function runPrompt(prompt) {
+async function checkQuestion(question, userAnswer) {
   return new Promise(async (resolve, reject) => {
     if (!assistant) {
       return reject("Assistant is not initialized.");
@@ -54,15 +54,48 @@ function runPrompt(prompt) {
       messages: [
         {
           role: "user",
-          content: `В ответе обязательно очищай Markdown разметку, не используй аннотации и сноски .\nПользователь: ${prompt}`,
+          content: `Проверь правильно ли пользователь ответил на вопрос, на вопрос . Верни строку в формате ключ=значение, где поле success — это true или false, поле message — это строка с комментарием для пользователя, не длиннее 100 символов, поля должны быть разделены символом |. Пример: success=true|message=Операция выполнена успешно\nВопрос:${question}\nОтвет пользователя: ${userAnswer}`,
         },
       ],
     });
 
     const stream = openai.beta.threads.runs
       .stream(thread.id, { assistant_id: assistant.id })
-      // .on("textCreated", () => console.log("assistant >"))
-      // .on("toolCallCreated", (event) => console.log("assistant " + event.type))
+      .on("messageDone", async (event) => {
+        if (event.content[0].type === "text") {
+          const { text } = event.content[0];
+          const result = {};
+          let string = text.value;
+          const pairs = string.split("|");
+
+          pairs.forEach((pair) => {
+            const [key, value] = pair.split("=");
+            result[key.trim()] = value.trim();
+          });
+
+          resolve(result);
+        }
+      });
+  });
+}
+
+async function runPrompt(prompt) {
+  return new Promise(async (resolve, reject) => {
+    if (!assistant) {
+      return reject("Assistant is not initialized.");
+    }
+
+    const thread = await openai.beta.threads.create({
+      messages: [
+        {
+          role: "user",
+          content: `В ответе обязательно очищай Markdown разметку, не используй аннотации, сноски и цитирование источников.\nПользователь: ${prompt}`,
+        },
+      ],
+    });
+
+    const stream = openai.beta.threads.runs
+      .stream(thread.id, { assistant_id: assistant.id })
       .on("messageDone", async (event) => {
         if (event.content[0].type === "text") {
           const { text } = event.content[0];
@@ -74,4 +107,5 @@ function runPrompt(prompt) {
 
 module.exports = {
   runPrompt,
+  checkQuestion,
 };
