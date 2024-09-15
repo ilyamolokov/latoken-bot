@@ -1,4 +1,4 @@
-# Report Free Riding
+Report Free Riding
 
 If one can benefit from fake work - all others will end up poorly. Report free riding immediately to make such strategy punished.
 
@@ -32,7 +32,7 @@ Make free riding transparent by speaking up or asking questions at morning sync 
 
 Remember:
 
-## New companies generally should not exist
+New companies generally should not exist
 
 New companies could exist only because they invent a better culture a better solution to the free rider problem to punch through status quo.
 

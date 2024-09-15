@@ -1,8 +1,8 @@
-# Cut Cancer
+Cut Cancer
 
 Parasites are the main killers, not wars. Cut cancer fast, before it spreads through organism. Deadly cultural cancer is when freeriding is Nash stable. The startups are a better solution for the cultural cancer problem, the single reason for them to exist.
 
-## 1. Agent is a deadly cultural cancer - cut it before all organism is infected.
+1. Agent is a deadly cultural cancer - cut it before all organism is infected.
 
 Cancer is a cell cheating on an organism when other cells fail to detect and stop it.
 
@@ -10,7 +10,7 @@ Wars are not the main people’s killer, parasites are. The same about organisat
 
 https://youtu.be/uoJwt9l-XhQ?si=9BlFg3flM5-oJ2rb
 
-### 2. Cancer Agents use asymmetry of information to freeride Principals.
+2. Cancer Agents use asymmetry of information to freeride Principals.
 
 An agent knows details of execution unknown to the principal and this assymetry of information may be used to freeride them. For example: Newly hired HR may blameshift lack of hires to negative attitude of candidates to crypto or to the company. The real reason could be zero attempts to contact candidates or poor quality of communication. If principals do not have capacity to check the number of contact attempts or check messages and calls records, than why not to freeride them?
 
@@ -20,7 +20,7 @@ This decision is a differentiator between an Agent and a Principal. Make the rig
 
 _Dr. Ringelmann found out that with a rope pulling team size growth to 8 average effort declines 50%. An exception is only when team consists of professional sportsmen (as free-riders are wiped out fast in sports)._
 
-### 3. Challenge freeriding to make a hardworking Nash stable strategy
+3. Challenge freeriding to make a hardworking Nash stable strategy
 
 _That is how you ensure no one can benefit with an alternative strategy, thus champion strategy is Nash stable._
 
@@ -30,19 +30,19 @@ If teammates ask him to make an effort to write an appropriate story and give hi
 
 Small, yet powerful with the compound effect.
 
-### High Performance Culture = Agents can not collude against Principals to hide freeriding as:
+High Performance Culture = Agents can not collude against Principals to hide freeriding as:
 
-### 1. performance is transparent with OKRs, 360 and
+1. performance is transparent with OKRs, 360 and
 
-### 2. most of the team are Principals who report freeriding as
+2. most of the team are Principals who report freeriding as
 
-### 3. most of the teammates are motivated by stocks and
+3. most of the teammates are motivated by stocks and
 
-### 4. their goal of life is to change the world with a product
+4. their goal of life is to change the world with a product
 
 Now you know the underlying theory for our layer 1 cultural protocol:
 
-### **I commit to:**
+**I commit to:**
 
 - **Put clients first, ego last <=** (4. their goal of life is to change the world with a product, 3. most of the teammates motivated by stocks)
 - **Demand exceptional performance from myself and teammates like olympic sportsmen principal** (2. most of the team are Principals who report freeriding)
@@ -51,7 +51,7 @@ Now you know the underlying theory for our layer 1 cultural protocol:
 
 Do the above to have the right answer:
 
-## Did you detect cancer cells before too late for the organisation organism?
+Did you detect cancer cells before too late for the organisation organism?
 
 https://www.facebook.com/Alittlebeautyperth/posts/2420471178049983
 
@@ -69,4 +69,4 @@ Yes, because they are all principals living to change the world, proved by their
 
 [https://coda.io/d/\_d7mTbRgO_nI/\_suYU-](https://coda.io/d/_d7mTbRgO_nI/_suYU-)
 
-## Did you detect cancer cells before too late for organisation organism?
+Did you detect cancer cells before too late for organisation organism?

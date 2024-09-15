@@ -1,4 +1,4 @@
-# Investors vs. Employees
+Investors vs. Employees
 
 - [February 23, 2017](https://carta.com/2017/02/23/)
 - [Henry Ward](https://carta.com/author/henry-ward/)
@@ -19,6 +19,6 @@ The CEO negotiates term sheets with investors and offer letters with employees. 
 
 Employee ownership is decreasing because these equity decisions are made in board meetings, where investors have a seat and employees don’t.
 
-### **Appendix A**
+Appendix A
 
 Last October we did an analysis of how Carta employee ownership compared to 10 randomly chosen Series B SAAS or Fintech companies. Below are the high-level results. A great question for employees evaluating startups is to ask how much of the company is already employee owned.

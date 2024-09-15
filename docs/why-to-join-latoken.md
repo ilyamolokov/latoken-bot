@@ -1,4 +1,4 @@
-# Why to join LATOKEN?
+Why to join LATOKEN?
 
 Go global to grow with the frontier tech to change the world
 
@@ -16,4 +16,4 @@ LATOKEN helps to find the next bitcoin before others. Thus we democratises the b
 
 Learn [https://coda.io/d/\_d7mTbRgO_nI/\_su9fb](https://coda.io/d/_d7mTbRgO_nI/_su9fb)
 
-### Learn [https://coda.io/d/\_d7mTbRgO_nI/\_suMGA](https://coda.io/d/_d7mTbRgO_nI/_suMGA)
+Learn [https://coda.io/d/\_d7mTbRgO_nI/\_suMGA](https://coda.io/d/_d7mTbRgO_nI/_suMGA)

@@ -1,4 +1,4 @@
-# Career Review
+Career Review
 
 Why Big3 alumni lead Fortune 500 legacy companies, not tech companies, and earn 10-100x less than tech CEOs?
 

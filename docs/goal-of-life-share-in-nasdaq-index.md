@@ -1,8 +1,8 @@
-# Goal of life - share in Nasdaq index
+Goal of life - share in Nasdaq index
 
 The proof that your life made an impact - your stake in Nasdaq index. Get stock options.
 
-## 1. Life will use all energy and matter to build home for life.
+1. Life will use all energy and matter to build home for life.
 
 Life is program which use energy to selfreplicate.
 
@@ -12,7 +12,7 @@ Life will not stop untill all energy and matter is used to build home for life. 
 
 Because it evolves in competition with other forms of life for energy sources (share in food niches or market). Eg. use energy better to get more energy under management or loose in competition and die. Natural and economic selection is strongly biased to DNA (in the past) and cultures (today), ML (tomorrow) maximizing efficiency of energy use to sustain itself in the future.
 
-## 2. Future energy under management = future earnings or global cap
+2. Future energy under management = future earnings or global cap
 
 Modern macro organism on earth is maximizing future energy under management via price transmission through markets:
 
@@ -26,4 +26,4 @@ Our mission is to help everybody to become stakeholders of the future. The more 
 
 Price transmission is layer 4 which works on top of layer 3 human rights: protected rights for life, property and trade.
 
-## PS. Yes, love is well explained by neuroeconomics. Go for a date if it helps to increase Nasdaq index.
+PS. Yes, love is well explained by neuroeconomics. Go for a date if it helps to increase Nasdaq index.
