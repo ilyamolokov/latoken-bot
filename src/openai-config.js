@@ -1,5 +1,6 @@
 const { OpenAI } = require("openai");
 const fs = require("fs");
+const { removeCitations } = require("./utils.js");
 
 const openai = new OpenAI();
 let assistant;
@@ -7,8 +8,7 @@ let assistant;
 async function main() {
   assistant = await openai.beta.assistants.create({
     name: "Latoken Culture Deck Assistant",
-    instructions:
-      "Ты бот помощник компании LATOKEN, который отвечает на вопросы пользователя только в контексте Latoken и Culture Deck.",
+    instructions: "Ты бот помощник компании LATOKEN.",
     model: "gpt-4o",
     tools: [{ type: "file_search" }],
   });
@@ -44,47 +44,6 @@ async function main() {
 
 main();
 
-async function checkQuestion(question, userAnswer) {
-  return new Promise(async (resolve, reject) => {
-    if (!assistant) {
-      return reject("Assistant is not initialized.");
-    }
-
-    const thread = await openai.beta.threads.create({
-      messages: [
-        {
-          role: "user",
-          content: `Проверь правильно ли пользователь ответил на вопрос, ответ считается правильным если он включает 70% ключевых моментов. Верни строку в формате ключ=значение, где поле success — это true или false, поле message — это строка с комментарием для пользователя, не длиннее 100 символов, поля должны быть разделены символом |. Пример: success=true|message=Операция выполнена успешно. В поле message обязательно очищай Markdown разметку, не используй аннотации, сноски и цитирование источников.\nВопрос:${question}\nОтвет пользователя: ${userAnswer}`,
-        },
-      ],
-    });
-
-    const stream = openai.beta.threads.runs
-      .stream(thread.id, { assistant_id: assistant.id })
-      .on("messageDone", async (event) => {
-        if (event.content[0].type === "text") {
-          const { text } = event.content[0];
-          const result = {};
-          const string = text.value;
-          const pairs = string.split("|");
-
-          pairs.forEach((pair) => {
-            const [k, v] = pair.split("=");
-            const key = k.trim();
-            const value = v.trim();
-
-            if (key === "success") {
-              result[key] = value === "true" ? true : false;
-            } else {
-              result[key] = value;
-            }
-          });
-          resolve(result);
-        }
-      });
-  });
-}
-
 async function runPrompt(prompt) {
   return new Promise(async (resolve, reject) => {
     if (!assistant) {
@@ -95,7 +54,7 @@ async function runPrompt(prompt) {
       messages: [
         {
           role: "user",
-          content: `В ответе обязательно очищай Markdown разметку, очищай аннотации, очищай сноски и очищай цитирование источников.\nПользователь: ${prompt}`,
+          content: `Пользователь: ${prompt}`,
         },
       ],
     });
@@ -103,10 +62,50 @@ async function runPrompt(prompt) {
     const stream = openai.beta.threads.runs
       .stream(thread.id, { assistant_id: assistant.id })
       .on("messageDone", async (event) => {
-        if (event.content[0].type === "text") {
-          const { text } = event.content[0];
-          resolve(text.value);
-        }
+        if (event.content[0].type !== "text") return;
+        const { text } = event.content[0];
+        resolve(removeCitations(text.value));
+      });
+  });
+}
+
+async function checkQuestion(question, userAnswer) {
+  return new Promise(async (resolve, reject) => {
+    if (!assistant) {
+      return reject("Assistant is not initialized.");
+    }
+
+    const thread = await openai.beta.threads.create({
+      messages: [
+        {
+          role: "user",
+          content: `Проверь правильно ли пользователь ответил на вопрос, ответ считается правильным если он включает 70% ключевых моментов. Верни строку в формате ключ=значение, где поле success — это true или false, поле message — это строка с комментарием для пользователя, не длиннее 100 символов, поля должны быть разделены символом |. Пример: success=true|message=Операция выполнена успешно.\nВопрос:${question}\nОтвет пользователя: ${userAnswer}`,
+        },
+      ],
+    });
+
+    const stream = openai.beta.threads.runs
+      .stream(thread.id, { assistant_id: assistant.id })
+      .on("messageDone", async (event) => {
+        if (event.content[0].type !== "text") return;
+
+        const { text } = event.content[0];
+        const result = {};
+        const string = text.value;
+        const pairs = string.split("|");
+
+        pairs.forEach((pair) => {
+          const [k, v] = pair.split("=");
+          const key = k.trim();
+          const value = v.trim();
+
+          if (key === "success") {
+            result[key] = value === "true" ? true : false;
+          } else {
+            result[key] = removeCitations(value);
+          }
+        });
+        resolve(result);
       });
   });
 }

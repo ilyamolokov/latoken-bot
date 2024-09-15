@@ -10,6 +10,10 @@ function createWelcomeMessage(chat) {
   \nДобро пожаловать в мир LATOKEN! 🌐`;
 }
 
+function removeCitations(text) {
+  return text.replace(/【\d+:\d+†source】/g, "");
+}
+
 const QUESTIONS = [
   "Почему Латокен помогает людям изучать и покупать активы?",
   "Зачем нужен Sugar Cookie тест?",
@@ -19,6 +23,7 @@ const QUESTIONS = [
 
 module.exports = {
   createWelcomeMessage,
+  removeCitations,
   LATOKEN_URL,
   QUESTIONS,
 };
