@@ -65,18 +65,18 @@ async function checkQuestion(question, userAnswer) {
         if (event.content[0].type === "text") {
           const { text } = event.content[0];
           const result = {};
-          let string = text.value;
+          const string = text.value;
           const pairs = string.split("|");
 
           pairs.forEach((pair) => {
-            const [key, value] = pair.split("=");
-            const k = key.trim();
-            const v = value.trim();
+            const [k, v] = pair.split("=");
+            const key = k.trim();
+            const value = v.trim();
 
-            if (k === "success") {
-              result[k] = v === "true" ? true : false;
+            if (key === "success") {
+              result[key] = value === "true" ? true : false;
             } else {
-              result[k] = v;
+              result[key] = value;
             }
           });
           resolve(result);
