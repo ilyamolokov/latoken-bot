@@ -1,18 +1,20 @@
 require("dotenv").config();
 
-const TelegramBot = require("node-telegram-bot-api");
+import TelegramBot from "node-telegram-bot-api";
 
-const { runPrompt, checkQuestion } = require("./openai-config.js");
-const { createWelcomeMessage, LATOKEN_URL, QUESTIONS } = require("./utils.js");
+import { createWelcomeMessage, LATOKEN_URL, QUESTIONS } from "./utils";
+import { checkQuestion, runPrompt } from "./openai-config";
 
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
+const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN ?? "", {
+  polling: true,
+});
 
 let isQuizMode = false;
 let questionIndex = 0;
 
 bot.on("message", async (message) => {
   const { id: chat_id } = message.chat;
-  const text = message.text;
+  const text = message.text ?? '';
 
   try {
     if (isQuizMode) {
@@ -81,7 +83,7 @@ bot.on("message", async (message) => {
       return await bot.editMessageText(gptResponse, {
         chat_id,
         message_id: loader.message_id,
-        parse_mode: "markdown",
+        parse_mode: "Markdown",
       });
     }
   } catch (e) {
@@ -95,6 +97,8 @@ bot.on("message", async (message) => {
 
 bot.on("callback_query", async (query) => {
   const message = query.message;
+  if (!message) return;
+
   const data = query.data;
   const chat_id = message.chat.id;
 

@@ -1,6 +1,8 @@
-const LATOKEN_URL = "https://latoken.com/";
+import { Chat } from "node-telegram-bot-api";
 
-function createWelcomeMessage(chat) {
+export const LATOKEN_URL = "https://latoken.com/";
+
+export function createWelcomeMessage(chat: Chat) {
   const { username, first_name } = chat;
   return `Здравствуйте, ${
     Boolean(first_name) ? first_name : "@" + username
@@ -10,20 +12,13 @@ function createWelcomeMessage(chat) {
   \nДобро пожаловать в мир LATOKEN! 🌐`;
 }
 
-function removeCitations(text) {
+export function removeCitations(text: string) {
   return text.replace(/【\d+:\d+†source】/g, "");
 }
 
-const QUESTIONS = [
+export const QUESTIONS = [
   "Почему Латокен помогает людям изучать и покупать активы?",
   "Зачем нужен Sugar Cookie тест?",
   "Зачем нужен Wartime СЕО?",
   "В каких случаях стресс полезен и в каких вреден?",
 ];
-
-module.exports = {
-  createWelcomeMessage,
-  removeCitations,
-  LATOKEN_URL,
-  QUESTIONS,
-};

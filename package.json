@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "ts-node ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -11,9 +11,11 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "node-telegram-bot-api": "^0.66.0",
-    "openai": "^4.60.1"
+    "openai": "^4.60.1",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@types/node-telegram-bot-api": "^0.64.7",
     "nodemon": "^3.1.4"
   }
 }

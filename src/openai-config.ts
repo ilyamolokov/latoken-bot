@@ -1,9 +1,9 @@
-const { OpenAI } = require("openai");
-const fs = require("fs");
-const { removeCitations } = require("./utils.js");
+import fs from "fs";
+import { OpenAI } from "openai";
+import { removeCitations } from "./utils";
 
 const openai = new OpenAI();
-let assistant;
+let assistant: OpenAI.Beta.Assistants.Assistant;
 
 async function main() {
   assistant = await openai.beta.assistants.create({
@@ -44,7 +44,7 @@ async function main() {
 
 main();
 
-async function runPrompt(prompt) {
+export async function runPrompt(prompt: string): Promise<string> {
   return new Promise(async (resolve, reject) => {
     if (!assistant) {
       return reject("Assistant is not initialized.");
@@ -69,7 +69,14 @@ async function runPrompt(prompt) {
   });
 }
 
-async function checkQuestion(question, userAnswer) {
+interface IAnswerStatus {
+  success: boolean;
+  message: string;
+}
+export async function checkQuestion(
+  question: string,
+  userAnswer: string
+): Promise<IAnswerStatus> {
   return new Promise(async (resolve, reject) => {
     if (!assistant) {
       return reject("Assistant is not initialized.");
@@ -90,7 +97,7 @@ async function checkQuestion(question, userAnswer) {
         if (event.content[0].type !== "text") return;
 
         const { text } = event.content[0];
-        const result = {};
+        const result = {} as IAnswerStatus;
         const string = text.value;
         const pairs = string.split("|");
 
@@ -101,7 +108,9 @@ async function checkQuestion(question, userAnswer) {
 
           if (key === "success") {
             result[key] = value === "true" ? true : false;
-          } else {
+          }
+
+          if (key === "message") {
             result[key] = removeCitations(value);
           }
         });
@@ -109,8 +118,3 @@ async function checkQuestion(question, userAnswer) {
       });
   });
 }
-
-module.exports = {
-  runPrompt,
-  checkQuestion,
-};
